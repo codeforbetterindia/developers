@@ -5,7 +5,12 @@ import Drawer from 'material-ui/Drawer';
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import InboxIcon from 'material-ui-icons/Inbox';
+
+import HomeIcon from 'material-ui-icons/Home';
+import PhoneIcon from 'material-ui-icons/Phone';
+import GolfCourseIcon from 'material-ui-icons/GolfCourse';
+import PeopleIcon from 'material-ui-icons/People';
+import WbSunnyIcon from 'material-ui-icons/WbSunny';
 import DraftsIcon from 'material-ui-icons/Drafts';
 import StarIcon from 'material-ui-icons/Star';
 import SendIcon from 'material-ui-icons/Send';
@@ -13,138 +18,69 @@ import MailIcon from 'material-ui-icons/Mail';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ReportIcon from 'material-ui-icons/Report';
 
-const styleSheet = createStyleSheet('UndockedDrawer', {
+const styleSheet = createStyleSheet('AppDrawer', {
   list: {
     width: 250,
     flex: 'initial',
   },
-  listFull: {
-    width: 'auto',
-    flex: 'initial',
-  },
 });
 
-class UndockedDrawer extends Component {
-  state = {
-    open: {
-      top: false,
-      left: false,
-      bottom: false,
-      right: false,
-    },
-  };
-
-  toggleDrawer = (side, open) => {
-    const drawerState = {};
-    drawerState[side] = open;
-    this.setState({ open: drawerState });
-  };
-
-  handleTopOpen = () => this.toggleDrawer('top', true);
-  handleTopClose = () => this.toggleDrawer('top', false);
-  handleLeftOpen = () => this.toggleDrawer('left', true);
-  handleLeftClose = () => this.toggleDrawer('left', false);
-  handleBottomOpen = () => this.toggleDrawer('bottom', true);
-  handleBottomClose = () => this.toggleDrawer('bottom', false);
-  handleRightOpen = () => this.toggleDrawer('right', true);
-  handleRightClose = () => this.toggleDrawer('right', false);
-
-  render() {
-    const classes = this.props.classes;
-
-    const mailFolderListItems = (
-      <div>
+const AppDrawer = ({ open, closeDrawer, classes }) => {
+  return (
+    <Drawer
+      open={open}
+      onRequestClose={closeDrawer}
+      onClick={closeDrawer}
+    >
+      <List className={classes.list}>
         <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
+          <ListItemText
+            primary="Code for Better India"
+            secondary="Developers Community"
+          />
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <StarIcon />
-          </ListItemIcon>
-          <ListItemText primary="Starred" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <SendIcon />
-          </ListItemIcon>
-          <ListItemText primary="Send mail" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </ListItem>
-      </div>
-    );
-
-    const otherMailFolderListItems = (
-      <div>
-        <ListItem button>
-          <ListItemIcon>
-            <MailIcon />
-          </ListItemIcon>
-          <ListItemText primary="All mail" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <DeleteIcon />
-          </ListItemIcon>
-          <ListItemText primary="Trash" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <ReportIcon />
-          </ListItemIcon>
-          <ListItemText primary="Spam" />
-        </ListItem>
-      </div>
-    );
-
-    const sideList = (
-      <div>
-        <List className={classes.list} disablePadding>
-          {mailFolderListItems}
-        </List>
         <Divider />
-        <List className={classes.list} disablePadding>
-          {otherMailFolderListItems}
-        </List>
-      </div>
-    );
-
-    const fullList = (
-      <div>
-        <List className={classes.listFull} disablePadding>
-          {mailFolderListItems}
-        </List>
-        <Divider />
-        <List className={classes.listFull} disablePadding>
-          {otherMailFolderListItems}
-        </List>
-      </div>
-    );
-
-    return (
-      <div>
-        <Button onClick={this.handleLeftOpen}>Open Left</Button>
-        <Drawer
-          open={this.props.open}
-          onRequestClose={this.props.closeDrawer}
-          onClick={this.props.closeDrawer}
-        >
-          {sideList}
-        </Drawer>
-      </div>
-    );
-  }
+        <ListItem button>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Home"
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="About Us"
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <GolfCourseIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Vision & Mission"
+          />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <PhoneIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="Contact Us"
+          />
+        </ListItem>
+      </List>
+    </Drawer>
+  );
 }
 
-UndockedDrawer.propTypes = {
+AppDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
+  open: PropTypes.bool.isRequired,
+  closeDrawer: PropTypes.func.isRequired,
 };
 
-export default withStyles(styleSheet)(UndockedDrawer);
+export default withStyles(styleSheet)(AppDrawer);

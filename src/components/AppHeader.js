@@ -32,7 +32,9 @@ const AppHeader = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography type="title" color="inherit" className={classes.flex}>Title</Typography>
+          <Typography type="title" color="inherit" className={classes.flex}>
+            Developers
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>
